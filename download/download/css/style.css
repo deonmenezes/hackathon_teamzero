@@ -1261,16 +1261,19 @@ ul.list-inline li {
     display: inline-block;
     font-size: 15px;
     font-weight: 500 !important;
+    margin: 15px; /* Adds space around all buttons */
 }
 
 .btn.v8:hover {
     background: #fff;
     color: #333 !important;
+    margin: 5px; /* Adds space around all buttons */
 
 }
 
 .btn.v8 i {
     margin-left: 5px;
+    margin: 10px; /* Adds space around all buttons */
 }
 
 .btn.v9 {
