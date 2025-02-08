@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tourist Map - Crowd Management</title>
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        text-align: center;
+      }
+      #map {
+        height: 600px;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .legend {
+        background: white;
+        padding: 10px;
+        position: absolute;
+        bottom: 30px;
+        right: 20px;
+        z-index: 1000;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      .legend span {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .low-crowd { color: green; }
+      .medium-crowd { color: orange; }
+      .high-crowd { color: red; }
+    </style>
+  </head>
+  <body>
+    <h2>Live Crowd Density of Tourist Attractions</h2>
+    <div id="map"></div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+      var map = L.map("map").setView([20.5937, 78.9629], 5); // Centered on India
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      // Fetch Places Data from Express Server
+      async function loadPlaces() {
+        try {
+          const response = await fetch(
+            "http://localhost:3000/places?location=27,76&radius=50000&type=tourist_attraction"
+          );
+          const places = await response.json();
+
+          places.forEach((place) => {
+            var color = getColor(place.crowd);
+
+            var marker = L.circleMarker([place.lat, place.lon], {
+              color: color,
+              fillColor: color,
+              fillOpacity: 0.7,
+              radius: 10,
+            }).addTo(map);
+
+            marker.bindPopup(`
+              <b>${place.name}</b><br>
+              <p><strong>Rating:</strong> ⭐ ${place.rating}</p>
+              <p><strong>Address:</strong> ${place.address}</p>
+              <p style="color:${color};"><strong>Crowd Level:</strong> ${place.crowd}</p>
+            `);
+          });
+        } catch (error) {
+          console.error("Error loading places:", error);
+        }
+      }
+
+      // Function to return color based on crowd level
+      function getColor(crowd) {
+        if (crowd === "High") return "red";
+        if (crowd === "Medium") return "orange";
+        return "green"; // Low
+      }
+
+      loadPlaces();
+    </script>
+  </body>
+</html>
