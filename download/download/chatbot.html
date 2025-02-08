@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBot - Your AI Travel Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        .transparent {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .site-navbar-wrap {
+            padding: 15px 0;
+        }
+
+        .site-navbar {
+            width: 100%;
+        }
+
+        .navbar-brand img {
+            max-height: 40px;
+        }
+
+        .site-navigation {
+            width: 100%;
+        }
+
+        .site-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .site-menu > li {
+            position: relative;
+            padding: 10px 20px;
+        }
+
+        .site-menu a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .has-children {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-width: 200px;
+            z-index: 1000;
+        }
+
+        .sub-menu {
+            left: 100%;
+            top: 0;
+        }
+
+        .has-children:hover > .dropdown {
+            display: block;
+        }
+
+        .dropdown li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown li:hover {
+            background: #f8f9fa;
+        }
+
+        .add-list {
+            padding: 10px 0;
+        }
+
+        .btn.v8 {
+            background: #2563eb;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mobile-bar {
+            display: none;
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            background: white;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            border: 4px solid #2563eb;
+            margin: 0 auto 1rem;
+        }
+
+        .chat-container {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .chat-messages {
+            height: 40vh;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+
+        .message.user .message-content {
+            background-color: #2563eb;
+            color: white;
+            border-bottom-right-radius: 0;
+        }
+
+        .message.bot .message-content {
+            background-color: #e5e7eb;
+            color: #1f2937;
+            border-bottom-left-radius: 0;
+        }
+
+        .chat-input {
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 9999px;
+            outline: none;
+        }
+
+        .voice-button {
+            background-color: #2563eb;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .voice-button.recording {
+            background-color: #dc2626;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .send-button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 991px) {
+            .d-lg-none {
+                display: block !important;
+            }
+            .d-none.d-lg-block {
+                display: none !important;
+            }
+            .mobile-bar {
+                display: block;
+            }
+            .site-menu {
+                display: none;
+            }
+            .add-list.float-right {
+                display: none;
+            }
+        }
+
+        .site-mobile-menu {
+            display: none;
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: white;
+            width: 300px;
+            z-index: 2000;
+            padding: 20px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .site-mobile-menu.active {
+            display: block;
+        }
+
+        .site-mobile-menu-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .site-mobile-menu-close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #f3f4f6;
+            padding: 1rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header transparent scroll-hide">
+        <div class="site-navbar-wrap v1">
+            <div class="container">
+                <div class="site-navbar">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 col-6">
+                            <a class="navbar-brand" href="#">
+                                <img src="images/travello_logo.png" alt="logo" class="img-fluid" />
+                            </a>
+                        </div>
+                        <div class="col-md-8 col-6">
+                            <nav class="site-navigation float-left">
+                                <div class="container">
+                                    <ul class="site-menu js-clone-nav d-none d-lg-block">
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="booking.html">Bookings</a></li>
+                                        <li class="has-children">
+                                            <a href="#">Listings</a>
+                                            <ul class="dropdown">
+                                                <li><a href="list-fullwidth.html">Full Width</a></li>
+                                                <li><a href="list-left-sidebar.html">Left Sidebar</a></li>
+                                                <li><a href="list-right-sidebar.html">Right Sidebar</a></li>
+                                                <li><a href="grid-fullwidth.html">Grid Full Width</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="d-lg-none sm-right">
+                                <a href="#" class="mobile-bar js-menu-toggle">
+                                    <span class="ion-android-menu"></span>
+                                </a>
+                            </div>
+                            <div class="add-list float-right">
+                                <a class="btn v8" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="site-mobile-menu">
+                    <div class="site-mobile-menu-header">
+                        <div class="site-mobile-menu-close js-menu-toggle">
+                            <span class="ion-ios-close-empty"></span>
+                        </div>
+                    </div>
+                    <div class="site-mobile-menu-body"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="profile-section">
+                <img src="images/travello_logo.png" alt="TravelBot" class="profile-image">
+                <h1 style="color: #1e40af; font-size: 1.875rem; font-weight: bold; margin-bottom: 0.5rem;">TravelBot</h1>
+                <p style="color: #374151; margin-bottom: 0.5rem;">
+                    Hello! I'm TravelBot, your AI travel assistant.
+                </p>
+                <p style="color: #374151; margin-bottom: 1.5rem;">
+                    Ready to plan your next adventure?
+                </p>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Messages will be inserted here by JavaScript -->
+                </div>
+                <div class="chat-input">
+                    <div class="input-group">
+                        <button class="voice-button" id="voice-button" onclick="toggleRecording()">
+                            <i class="ion-ios-mic-outline"></i>
+                        </button>
+                        <input type="text" placeholder="Ask me about your travel plans..." id="message-input">
+                        <button class="send-button" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 TravelBot AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelectorAll('.js-menu-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelector('.site-mobile-menu').classList.toggle('active');
+            });
+        });
+
+        // Chat functionality
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    addMessage("I'm your travel assistant! I can help you plan trips, find flights, book hotels, and discover exciting activities. What would you like to know?", 'bot');
+                }, 1000);
+            }
+        }
+
+        // Voice recording functionality
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        async function setupRecorder() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = (event) => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    audioChunks = [];
+                    // Here you would typically send the audioBlob to your speech-to-text service
+                    addMessage("Voice message recorded! (Speech-to-text processing would happen here)", 'user');
+                };
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                alert('Unable to access microphone. Please check your permissions.');
+            }
+        }
+
+        function toggleRecording() {
+            const voiceButton = document.getElementById('voice-button');
+            
+            if (!mediaRecorder) {
+                setupRecorder();
+                return;
+            }
+
+            if (!isRecording) {
+                mediaRecorder.start();
+                isRecording = true;
+                voiceButton.classList.add('recording');
+                voiceButton.innerHTML = '<i class="ion-ios-mic"></i>';
+            } else {
+                mediaRecorder.stop();
+                isRecording = false;
+                voiceButton.classList.remove('recording');
+                voiceButton.innerHTML = '<i class="ion-ios-mic-outline"></i>';
+            }
+        }
+
+        // Enter key handler
+        document.getElementById('message-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initial message
+        window.onload = function() {
+            setTimeout(() => {
+                addMessage("Hi there! I'm TravelBot. Where would you like to travel to?", 'bot');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
