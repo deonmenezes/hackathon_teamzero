@@ -89,18 +89,27 @@
             </div>
         </header>
         
-        <div class="breadcrumb-section" style="background-image: url(images/breadcrumb/travel-banner.jpg)">
-            <div class="overlay op-5"></div>
-            <div class="container">
-                <div class="row align-items-center pad-top-80">
-                    <div class="col-md-6 col-12">
-                        <div class="breadcrumb-menu">
-                            <h2 class="page-title">All Travel Packages</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="breadcrumb-section">
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row align-items-center pad-top-80">
+                  <div class="col-md-6 col-12">
+                      <div class="breadcrumb-menu">
+                        <h2 class="breadcrumb-adventure-line">
+                          Your Adventure Starts Here
+                      </h2>
+                      
+                          <p class="breadcrumb-scrolling-text">
+                              Explore tailored experiences that combine adventure, culture, and sustainability.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      
+      
         
         <div class="package-listing pad-bot-50 section-padding">
             <div class="container">
@@ -359,5 +368,14 @@
     <!--Main js-->
     <script src="js/main.js"></script>
     <!--Scripts ends-->
+    <script>window.addEventListener("scroll", function () {
+      const breadcrumbSection = document.querySelector(".breadcrumb-section");
+      if (window.scrollY > 50) {
+          breadcrumbSection.classList.add("scrolled");
+      } else {
+          breadcrumbSection.classList.remove("scrolled");
+      }
+  });
+  </script>
   </body>
 </html>
