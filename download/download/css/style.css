@@ -863,7 +863,7 @@ ul.list-inline li {
 }
 
 .link-hov.style2 {
-  color: #555;
+  color: #f6f5f5;
   transition: 0.5s;
   position: relative;
   font-size: 14px;
@@ -3641,7 +3641,7 @@ ul.list-inline li {
 .footer-wrapper.v1 .contact-info .text a,
 .footer-wrapper.v1 .contact-info .icon,
 .footer-wrapper.v1 .social-buttons li a i {
-  color: #555;
+  color: #ffffff;
 }
 
 .footer-content.nav {
@@ -3664,20 +3664,20 @@ ul.list-inline li {
 
 .footer-bottom-area {
   padding: 25px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.23);
+  border-top: 1px solid rgb(255, 255, 255);
 }
 
 .footer-bottom-area p {
   font-size: 13px;
   letter-spacing: 1px;
   font-weight: 400;
-  color: #555;
+  color: #ffffff;
 }
 
 .footer-top-area .footer-content .title {
   font-size: 20px;
   font-weight: 500;
-  color: #333;
+  color: #efeeee;
   margin-top: 20px;
 }
 
@@ -3688,13 +3688,13 @@ ul.list-inline li {
 .footer .info,
 .phone-number,
 .email {
-  color: #7a7a7a;
+  color: #ffffff;
   font-size: 14px;
 }
 
 .company-desc p {
   font-size: 14px;
-  color: #555;
+  color: #efeded;
 }
 
 .footer .info {
@@ -3709,7 +3709,7 @@ ul.list-inline li {
 
 .phone-number span,
 .email span {
-  color: #999;
+  color: #fffcfc;
 }
 
 .footer-content ul li a {
@@ -3747,27 +3747,27 @@ ul.list-inline li {
 
 /*--------------style2-----------*/
 .footer-wrapper.v2 {
-  background: #f5f6f7;
+  background: #101112;
 }
 
 .footer-wrapper.v2 .company-desc p {
-  color: #555;
+  color: #f8f3f3;
 }
 
 .footer-wrapper.v2 .footer-top-area .footer-content .title,
 .footer-wrapper.v2 .contact-info .icon,
 .footer-wrapper.v2 .social-buttons li a i {
-  color: #333;
+  color: #fbf7f7;
 }
 
 .footer-wrapper.v2 .contact-info .text,
 .footer-wrapper.v2 .contact-info .text a {
-  color: #555;
+  color: #f5f0f0;
   font-weight: 400;
 }
 
 .footer-wrapper.v2 .footer-bottom-area {
-  border-top: 1px solid rgba(92, 113, 106, 0.13);
+  border-top: 1px solid rgba(250, 251, 251, 0.13);
   background: #f5f6f7;
 }
 
@@ -3801,12 +3801,12 @@ ul.list-inline li {
 
 .additional-link li a {
   font-size: 14px;
-  color: #555;
+  color: #ffffff;
   transition: 0.4s;
 }
 
 .additional-link li a:hover {
-  color: #333;
+  color: #f8f8f8;
 }
 
 /*--------------------------------------------
@@ -8524,4 +8524,23 @@ span.infobox_rate {
 .popular-catagory-content {
   flex: 1 1 30%; /* Each container takes 30% of the row width */
   height: 250px; /* Adjust height as needed */
+}
+
+.process-icon.v1 img {
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Ensure the aspect ratio remains square */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the entire circle */
+  display: block;
+  margin: 0 auto; /* Centers the image horizontally */
+}
+.process-icon.v1 {
+  width: 120px; /* Slightly larger than the image */
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f5f5f5; /* Optional: Light background for contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px; /* Centers and adds spacing */
 }
