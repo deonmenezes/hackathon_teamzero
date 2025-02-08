@@ -8482,3 +8482,15 @@ span.infobox_rate {
     justify-content: center; /* Center align packages on smaller screens */
   }
 }
+
+.carousel-inner .carousel-item img {
+  width: 100%; /* Ensures the image spans the container */
+  height: 300px; /* Set a fixed height */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.list-gallery-thumb img {
+  width: 80px; /* Set a fixed width */
+  height: 60px; /* Set a fixed height */
+  object-fit: cover;
+}
