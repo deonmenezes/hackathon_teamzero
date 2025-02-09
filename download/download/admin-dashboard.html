@@ -1,0 +1,27 @@
+<h1>Admin Dashboard</h1>
+<button onclick="logout()">Logout</button>
+<div id="users"></div>
+
+<script>
+async function fetchUsers() {
+    const response = await fetch("http://localhost:5000/admin/users");
+    const data = await response.json();
+
+    if (data.success) {
+        let userList = "<h2>All Users</h2><ul>";
+        data.users.forEach(user => {
+            userList += `<li>${user.user_name} - ${user.email} (${user.role})</li>`;
+        });
+        userList += "</ul>";
+        document.getElementById("users").innerHTML = userList;
+    }
+}
+
+function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userRole");
+    window.location.href = "login.html";
+}
+
+fetchUsers();
+</script>
