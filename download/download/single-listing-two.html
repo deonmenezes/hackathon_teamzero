@@ -18,6 +18,44 @@
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
     <!-- Document Title -->
     <title>listagram - Directory Listing HTML Template</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    text-align: left;
+  }
+  #spiti-map-container {
+    margin-top: 20px;
+    position: relative;
+  }
+  #spiti-map {
+    height: 600px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .spiti-legend {
+    background: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+  }
+  .spiti-legend span {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .spiti-low-crowd { color: green; }
+  .spiti-medium-crowd { color: orange; }
+  .spiti-high-crowd { color: red; }
+</style>
+
 </head>
 
 <body>
@@ -109,15 +147,15 @@
                             <div id="overview" class="list-details-section">
                                 <h4>Overview</h4>
                                 <div class="overview-content">
-                                    <p class="mar-bot-10">The Eco-Friendly Sundarbans Wildlife Retreat offers a unique opportunity to explore the largest mangrove forest in the world. This trip is designed for nature lovers, adventure seekers, and eco-conscious travelers.</p>
-                                    <p class="mar-bot-10">Experience the rich biodiversity of Sundarbans, home to the majestic Royal Bengal Tiger, saltwater crocodiles, and diverse bird species. Enjoy sustainable accommodations, boat safaris, and interactions with the local community.</p>
+                                    <p class="mar-bot-10">The Spiti Valley Slow Travel experience offers a unique way to explore the serene landscapes of the high-altitude Himalayan desert. This trip is perfect for travelers looking to immerse themselves in local culture, sustainable tourism, and adventure.</p>
+                                    <p class="mar-bot-10">Discover ancient monasteries, traditional Spitian homestays, and eco-friendly trekking routes. Enjoy breathtaking mountain views, visit remote villages, and experience the slow-paced lifestyle of Spiti Valley.</p>
                                 </div>
                                 <div class="mar-top-20">
                                     <h6>Itinerary</h6>
                                     <ul class="listing-features">
-                                        <li><i class="icofont-location-pin"></i> Day 1: Arrival & Eco-Lodge Stay</li>
-                                        <li><i class="icofont-boat"></i> Day 2: Sunrise Boat Safari & Wildlife Spotting</li>
-                                        <li><i class="icofont-users"></i> Day 3: Local Community Interaction & Departure</li>
+                                        <li><i class="icofont-location-pin"></i> Day 1: Arrival in Kaza & Homestay Check-in</li>
+                                        <li><i class="icofont-boat"></i> Day 2: Explore Key Monastery & Langza Village</li>
+                                        <li><i class="icofont-users"></i>  Day 3: Trekking & Interaction with Locals</li>
                                     </ul>
                                 </div>
                             </div>
@@ -129,16 +167,16 @@
                                     <!--Slides-->
                                     <div class="carousel-inner" role="listbox">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/spiti 1.jpg" alt="Sundarbans Scenic View">
+                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/spiti.jpg" alt="Sundarbans Scenic View">
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/second image.jpeg" alt="Boat Safari in Mangroves">
+                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/spiti 1.jpg" alt="Boat Safari in Mangroves">
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/first image.jpeg" alt="Wildlife Spotting">
+                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/second image.jpeg" alt="Wildlife Spotting">
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="images/travel packages pics/Spiti Valley Slow Travel/spiti.jpg" alt="Eco-Friendly Stay">
+                                            <img class="d-block w-100" src="images/travel packages pics/spiti valley.jpg" alt="Eco-Friendly Stay">
                                         </div>
                                     </div>
                                     <!--Controls starts-->
@@ -159,17 +197,17 @@
                                     <div class="room-type-item">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <a href="images/travel packages pics/sundarbans wildlife retreat/eco-lodge.jpg" data-lightbox="room">
-                                                    <img src="images/travel packages pics/sundarbans wildlife retreat/eco-lodge.jpg" alt="Eco-Lodge">
+                                                <a href="images/travel packages pics/homestay.jpg" data-lightbox="room">
+                                                    <img src="images/travel packages pics/homestay.jpg" alt="Eco-Lodge">
                                                 </a>
                                             </div>
                                             <div class="col-md-8">
-                                                <h3>Eco-Lodge Stay</h3>
+                                                <h3>Spitian Homestay</h3>
                                                 <p>Max: 2 Persons</p>
                                                 <ul>
-                                                    <li>Solar-powered cottages</li>
-                                                    <li>Private balcony with forest views</li>
-                                                    <li>Eco-friendly toiletries</li>
+                                                    <li>Traditional mud-brick homes</li>
+                                                    <li>Locally sourced organic meals</li>
+                                                    <li>Authentic Spitian hospitality</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -177,17 +215,17 @@
                                     <div class="room-type-item">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <a href="images/travel packages pics/sundarbans wildlife retreat/tent-stay.jpg" data-lightbox="room">
-                                                    <img src="images/travel packages pics/sundarbans wildlife retreat/tent-stay.jpg" alt="Tent Stay">
+                                                <a href="images/travel packages pics/eco-lodge.png" data-lightbox="room">
+                                                    <img src="images/travel packages pics/eco-lodge.png" alt="Tent Stay">
                                                 </a>
                                             </div>
                                             <div class="col-md-8">
-                                                <h3>Jungle Tent Stay</h3>
+                                                <h3>High-Altitude Camping</h3>
                                                 <p>Max: 3 Persons</p>
                                                 <ul>
-                                                    <li>Waterproof tents with comfortable bedding</li>
-                                                    <li>Surrounded by nature</li>
-                                                    <li>Campfire experience</li>
+                                                    <li>Eco-friendly tent stays</li>
+                                                    <li>Camping under star-lit skies</li>
+                                                    <li>Solar-powered heating</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -241,6 +279,62 @@
                             </div>
                         </div>
                         <!--Listing Details ends-->
+                        <h2>🏔️ Spiti Valley Tourist Attractions - Live Crowd Levels</h2>
+<div id="spiti-map-container">
+  <div id="spiti-map"></div>
+</div>
+
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+  var spitiMap = L.map("spiti-map").setView([32.2446, 78.0322], 10); // Centered near Spiti Valley
+
+  // Add OpenStreetMap tiles
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors",
+  }).addTo(spitiMap);
+
+  // Fetch Places Data from Express Server
+  async function loadSpitiPlaces() {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/places?location=32.2446,78.0322&radius=20000&type=tourist_attraction"
+      );
+      const places = await response.json();
+
+      places.forEach((place) => {
+        var color = getSpitiColor(place.crowd);
+
+        var marker = L.circleMarker([place.lat, place.lon], {
+          color: color,
+          fillColor: color,
+          fillOpacity: 0.7,
+          radius: 10,
+        }).addTo(spitiMap);
+
+        marker.bindPopup(`
+          <b>${place.name}</b><br>
+          <p><strong>Rating:</strong> ⭐ ${place.rating}</p>
+          <p><strong>Address:</strong> ${place.address}</p>
+          <p style="color:${color};"><strong>Crowd Level:</strong> ${place.crowd}</p>
+        `);
+      });
+    } catch (error) {
+      console.error("Error loading Spiti Valley places:", error);
+    }
+  }
+
+  // Function to return color based on crowd level
+  function getSpitiColor(crowd) {
+    if (crowd === "High") return "red";
+    if (crowd === "Medium") return "orange";
+    return "green"; // Low
+  }
+
+  loadSpitiPlaces();
+</script>
+
                         <!--Similar Listing Starts-->
 <div class="similar-listing">
     <div class="similar-listing-title">
@@ -249,9 +343,9 @@
     <div class="swiper-container similar-list-wrap">
         <div class="swiper-wrapper">
             <div class="swiper-slide similar-item">
-                <img src="images/travel packages pics/sundarban.jpg" class="img-fluid" alt="Sundarbans Wildlife">
+                <img src="images/travel packages pics/Spiti Valley Slow Travel/first image.jpeg" class="img-fluid" alt="Spiti Valley Slow Travel">
                 <div class="similar-title-box">
-                    <h5><a href="package-spiti.html">Sundarbans Wildlife</a></h5>
+                    <h5><a href="package-spiti.html">Spiti Valley Slow Travel</a></h5>
                     <p><span class="price-amt">$150</span>/Avg</p>
                 </div>
                 <div class="customer-review">
@@ -596,10 +690,7 @@
               </div>
             </div>
           </div>
-
         </div>
-    </div>
-    
     <!--Color switcher starts-->
     <div class="color-switcher hide-color-switcher">
         <a class="switcher-button"><i class="ion-android-settings"></i></a>
@@ -625,6 +716,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
+    
     <!--Scripts ends-->
 </body>
 

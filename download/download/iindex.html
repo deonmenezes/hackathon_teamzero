@@ -3,25 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tourist Map - Crowd Management</title>
+    <title>Sundarbans - Tourist Map & Crowd Levels</title>
 
     <!-- Leaflet CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
       body {
         font-family: Arial, sans-serif;
         background-color: #f8f9fa;
         text-align: center;
       }
-      #map {
+      #sundarbans-map-container {
+        margin-top: 20px;
+        position: relative;
+      }
+      #sundarbans-map {
         height: 600px;
         width: 100%;
-        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       }
-      .legend {
+      .sundarbans-legend {
         background: white;
         padding: 10px;
         position: absolute;
@@ -30,48 +32,51 @@
         z-index: 1000;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-size: 14px;
       }
-      .legend span {
+      .sundarbans-legend span {
         display: block;
         margin-bottom: 5px;
       }
-      .low-crowd { color: green; }
-      .medium-crowd { color: orange; }
-      .high-crowd { color: red; }
+      .sundarbans-low-crowd { color: green; }
+      .sundarbans-medium-crowd { color: orange; }
+      .sundarbans-high-crowd { color: red; }
     </style>
   </head>
   <body>
-    <h2>Live Crowd Density of Tourist Attractions</h2>
-    <div id="map"></div>
+    <h2>🌿 Sundarbans Tourist Attractions - Live Crowd Levels</h2>
+    <div id="sundarbans-map-container">
+      <div id="sundarbans-map"></div>
+    </div>
 
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
-      var map = L.map("map").setView([20.5937, 78.9629], 5); // Centered on India
+      var sundarbansMap = L.map("sundarbans-map").setView([21.9497, 88.8720], 10); // Centered near Sundarbans
 
       // Add OpenStreetMap tiles
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
-      }).addTo(map);
+      }).addTo(sundarbansMap);
 
       // Fetch Places Data from Express Server
-      async function loadPlaces() {
+      async function loadSundarbansPlaces() {
         try {
           const response = await fetch(
-            "http://localhost:3000/places?location=27,76&radius=50000&type=tourist_attraction"
+            "http://localhost:3000/places?location=21.9497,88.8720&radius=20000&type=tourist_attraction"
           );
           const places = await response.json();
 
           places.forEach((place) => {
-            var color = getColor(place.crowd);
+            var color = getSundarbansColor(place.crowd);
 
             var marker = L.circleMarker([place.lat, place.lon], {
               color: color,
               fillColor: color,
               fillOpacity: 0.7,
               radius: 10,
-            }).addTo(map);
+            }).addTo(sundarbansMap);
 
             marker.bindPopup(`
               <b>${place.name}</b><br>
@@ -81,18 +86,18 @@
             `);
           });
         } catch (error) {
-          console.error("Error loading places:", error);
+          console.error("Error loading Sundarbans places:", error);
         }
       }
 
       // Function to return color based on crowd level
-      function getColor(crowd) {
+      function getSundarbansColor(crowd) {
         if (crowd === "High") return "red";
         if (crowd === "Medium") return "orange";
         return "green"; // Low
       }
 
-      loadPlaces();
+      loadSundarbansPlaces();
     </script>
   </body>
 </html>

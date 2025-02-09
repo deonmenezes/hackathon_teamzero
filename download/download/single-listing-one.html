@@ -18,6 +18,43 @@
     <link rel="stylesheet" href="css/switcher/skin-aqua.css" media="screen" id="style-colors" />
     <!-- Document Title -->
     <title>listagram - Directory Listing HTML Template</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        text-align: left;
+      }
+      #sundarbans-map-container {
+        margin-top: 20px;
+        position: relative;
+      }
+      #sundarbans-map {
+        height: 600px;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .sundarbans-legend {
+        background: white;
+        padding: 10px;
+        position: absolute;
+        bottom: 30px;
+        right: 20px;
+        z-index: 1000;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-size: 14px;
+      }
+      .sundarbans-legend span {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .sundarbans-low-crowd { color: green; }
+      .sundarbans-medium-crowd { color: orange; }
+      .sundarbans-high-crowd { color: red; }
+    </style>
 </head>
 
 <body>
@@ -241,6 +278,61 @@
                             </div>
                         </div>
                         <!--Listing Details ends-->
+                        <h2>🌿 Sundarbans Tourist Attractions - Live Crowd Levels</h2>
+    <div id="sundarbans-map-container">
+      <div id="sundarbans-map"></div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+      var sundarbansMap = L.map("sundarbans-map").setView([21.9497, 88.8720], 10); // Centered near Sundarbans
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(sundarbansMap);
+
+      // Fetch Places Data from Express Server
+      async function loadSundarbansPlaces() {
+        try {
+          const response = await fetch(
+            "http://localhost:3000/places?location=21.9497,88.8720&radius=20000&type=tourist_attraction"
+          );
+          const places = await response.json();
+
+          places.forEach((place) => {
+            var color = getSundarbansColor(place.crowd);
+
+            var marker = L.circleMarker([place.lat, place.lon], {
+              color: color,
+              fillColor: color,
+              fillOpacity: 0.7,
+              radius: 10,
+            }).addTo(sundarbansMap);
+
+            marker.bindPopup(`
+              <b>${place.name}</b><br>
+              <p><strong>Rating:</strong> ⭐ ${place.rating}</p>
+              <p><strong>Address:</strong> ${place.address}</p>
+              <p style="color:${color};"><strong>Crowd Level:</strong> ${place.crowd}</p>
+            `);
+          });
+        } catch (error) {
+          console.error("Error loading Sundarbans places:", error);
+        }
+      }
+
+      // Function to return color based on crowd level
+      function getSundarbansColor(crowd) {
+        if (crowd === "High") return "red";
+        if (crowd === "Medium") return "orange";
+        return "green"; // Low
+      }
+
+      loadSundarbansPlaces();
+    </script>
                         <!--Similar Listing Starts-->
 <div class="similar-listing">
     <div class="similar-listing-title">
@@ -596,10 +688,7 @@
               </div>
             </div>
           </div>
-
         </div>
-    </div>
-    
     <!--Color switcher starts-->
     <div class="color-switcher hide-color-switcher">
         <a class="switcher-button"><i class="ion-android-settings"></i></a>
@@ -625,6 +714,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_8C7p0Ws2gUu7wo0b6pK9Qu7LuzX2iWY&amp;libraries=places&amp;callback=initAutocomplete"></script>
     <!--Main js-->
     <script src="js/main.js"></script>
+    
     <!--Scripts ends-->
 </body>
 
