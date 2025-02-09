@@ -359,5 +359,18 @@
     <!--Main js-->
     <script src="js/main.js"></script>
     <!--Scripts ends-->
+    <script>window.addEventListener("scroll", function () {
+      const breadcrumbSection = document.querySelector(".breadcrumb-section");
+      if (window.scrollY > 50) {
+          breadcrumbSection.classList.add("scrolled");
+      } else {
+          breadcrumbSection.classList.remove("scrolled");
+      }
+  });
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html"; // ✅ Redirect to login page
+}
+
+  </script>
   </body>
 </html>

@@ -415,42 +415,80 @@
     <script src="js/main.js"></script>
     <!--Scripts ends-->
     <script>
-        document.getElementById("login-form").addEventListener("submit", async function(event) {
-            event.preventDefault();
-    
-            const email = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-    
-            const response = await fetch("http://localhost:5000/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-            });
-    
-            const result = await response.json();
-            alert(result.message);
-    
-            if (result.success) {
-                window.location.href = "dashboard.html"; // Redirect on success
-            }
-        });
-    
+        // ✅ Handle User Login
         document.getElementById("register-form").addEventListener("submit", async function(event) {
             event.preventDefault();
-    
+        
             const user_name = document.getElementById("user_name").value;
             const email = document.getElementById("email").value;
             const password = document.getElementById("user_password").value;
-    
+        
+            if (!user_name || !email || !password) {
+                alert("All fields are required!");
+                return;
+            }
+        
             const response = await fetch("http://localhost:5000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_name, email, password }),
             });
-    
+        
             const result = await response.json();
             alert(result.message);
+        
+            if (result.success) {
+                window.location.href = "login.html"; // Redirect to login page after successful registration
+            }
         });
+        
+        // ✅ Handle User Login
+        document.getElementById("login-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            const email = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+        
+            if (!email || !password) {
+                alert("All fields are required!");
+                return;
+            }
+        
+            const response = await fetch("http://localhost:5000/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+        
+            const result = await response.json();
+        
+            if (result.success) {
+                localStorage.setItem("loggedIn", "true");
+                localStorage.setItem("userRole", result.role);
+                localStorage.setItem("userName", result.user_name);
+        
+                if (result.role === "admin") {
+                    window.location.href = "admin-dashboard.html"; // ✅ Redirect admin
+                } else {
+                    window.location.href = "home-v2.html"; // ✅ Redirect normal user
+                }
+            } else {
+                alert("Invalid credentials!");
+            }
+        });
+        
+        // ✅ Restrict Access if Not Logged In
+        if (!localStorage.getItem("loggedIn")) {
+            window.location.href = "login.html"; // Redirect to login if not authenticated
+        }
+        
+        // ✅ Logout Function
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("userRole");
+            localStorage.removeItem("userName");
+            window.location.href = "login.html";
+        }
     </script>
 </body>
 

@@ -102,85 +102,260 @@
     <div class="page-wrapper">
       <!--header starts-->
       <header class="header transparent scroll-hide">
-        <!--Main Menu starts-->
         <div class="site-navbar-wrap v1">
-          <div class="container">
-            <div class="site-navbar">
-              <div class="row align-items-center">
-                <div class="col-md-4 col-6">
-                 <a class="navbar-brand" href="home-v2.html">
-    <img src="images/travello_logo.png" alt="logo" class="img-fluid" />
-</a>
-
-                </div>
-                <div class="col-md-8 col-6">
-                  <nav class="site-navigation float-left">
-                    <div class="container">
-                      <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <li><a href="home-v2.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="all-locations.html">Locations</a></li>
-                        <li class="has-children">
-                          <a href="#">Listings</a>
-                          <ul class="dropdown">
-                            <li>
-                              <a href="list-fullwidth.html">Full Width</a>
-                            </li>
-                            <li>
-                              <a href="list-left-sidebar.html">Left Sidebar</a>
-                            </li>
-                            <li>
-                              <a href="list-right-sidebar.html"
-                                >Right Sidebar</a
-                              >
-                            </li>
-                            <li>
-                              <a href="grid-fullwidth.html">Grid Full Width</a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+            <div class="container">
+                <div class="site-navbar">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-auto">
+                            <a class="navbar-brand" href="home-v2.html">
+                                <img src="images/travello_logo.png" alt="Travello" class="img-fluid">
+                            </a>
+                        </div>
+                        
+                        <!-- Combined Navigation and Actions in one line -->
+                        <div class="col d-none d-lg-flex justify-content-end align-items-center">
+                            <nav class="site-navigation me-4">
+                                <ul class="site-menu js-clone-nav d-flex m-0">
+                                    <li><a href="home-v2.html">Home</a></li>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="all-locations.html">Locations</a></li>
+                                    <li class="has-children">
+                                        <a href="#">Listings</a>
+                                        <ul class="dropdown">
+                                            <li><a href="list-fullwidth.html">Full Width</a></li>
+                                            <li><a href="list-left-sidebar.html">Left Sidebar</a></li>
+                                            <li><a href="list-right-sidebar.html">Right Sidebar</a></li>
+                                            <li><a href="grid-fullwidth.html">Grid Full Width</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="auth-buttons">
+                                <a class="btn-login" href="login.html">Login</a>
+                                <a class="btn-admin" href="db.html">Admin Panel</a>
+                            </div>
+                        </div>
+    
+                        <!-- Mobile Menu Toggle -->
+                        <div class="col-auto d-lg-none">
+                            <a href="#" class="mobile-bar js-menu-toggle">
+                                <span class="ion-android-menu"></span>
+                            </a>
+                        </div>
                     </div>
-                  </nav>
-                  <div class="d-lg-none sm-right">
-                    <a href="#" class="mobile-bar js-menu-toggle">
-                      <span class="ion-android-menu"></span>
-                    </a>
-                  </div>
-                  <div class="add-list float-right">
-                    <a class="btn v8" href="login.html"
-                      >Login <i class="ion-plus-round"></i
-                    ></a>
-                    <a class="btn v8" href="db.html"
-                    >Admin Panel<i class="ion-plus-round"></i
-                  ></a>
-                  </div>
-                  <div class="add-list float-right">
-                    <a class="btn v8" href="login.html"
-                      >Login <i class="ion-plus-round"></i
-                    ></a>
-                  </div>
-                  
                 </div>
-              </div>
             </div>
-            <!-- Mobile menu starts -->
+    
+            <!-- Mobile Menu -->
             <div class="site-mobile-menu">
-              <div class="site-mobile-menu-header">
-                <div class="site-mobile-menu-close js-menu-toggle">
-                  <span class="ion-ios-close-empty"></span>
+                <div class="site-mobile-menu-header">
+                    <div class="site-mobile-menu-close js-menu-toggle">
+                        <span class="ion-ios-close-empty"></span>
+                    </div>
                 </div>
-              </div>
-              <div class="site-mobile-menu-body"></div>
+                <div class="site-mobile-menu-body"></div>
             </div>
-            <!-- Mobile menu ends -->
-          </div>
         </div>
-
-        <!--Main Menu ends-->
-      </header>
-      <!--Header ends-->
+    </header>
+    
+    <style>
+    /* Updated styles */
+    .header {
+        position: relative;
+        width: 100%;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .site-navbar {
+        padding: 0.5rem 0;
+    }
+    
+    .site-menu {
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+    
+    .site-menu li {
+        position: relative;
+        margin: 0 0.8rem;
+    }
+    
+    .site-menu > li > a {
+        padding: 0.5rem 0;
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    
+    .site-menu > li > a:hover {
+        color: #007bff;
+    }
+    
+    .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        box-shadow: 0 2px 10px rgba(240, 62, 62, 0.1);
+        min-width: 200px;
+        padding: 0.5rem 0;
+        z-index: 1000;
+    }
+    
+    .has-children:hover .dropdown {
+        display: block;
+    }
+    
+    .dropdown li a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #333;
+        text-decoration: none;
+    }
+    
+    /* New button styles */
+    .auth-buttons {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .btn-login {
+        padding: 0.5rem 1.5rem;
+        color: #007bff;
+        text-decoration: none;
+        border: 2px solid #007bff;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-login:hover {
+        background: #007bff;
+        color: white;
+    }
+    
+    .btn-admin {
+        padding: 0.5rem 1.5rem;
+        background: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-admin:hover {
+        background: #218838;
+    }
+    
+    @media (max-width: 991px) {
+        .site-mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1001;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+    
+        .site-mobile-menu.active {
+            transform: translateX(0);
+        }
+    }
+    </style>
+    <style>
+    /* Add these styles to your CSS file */
+    .header {
+        position: relative;
+        width: 100%;
+    }
+    
+    .site-navbar {
+        padding: 1rem 0;
+    }
+    
+    .site-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .site-menu li {
+        position: relative;
+        margin: 0 1rem;
+    }
+    
+    .site-menu > li > a {
+        padding: 0.5rem 0;
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        min-width: 200px;
+        padding: 0.5rem 0;
+        z-index: 1000;
+    }
+    
+    .has-children:hover .dropdown {
+        display: block;
+    }
+    
+    .dropdown li a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .gap-2 {
+        gap: 0.5rem;
+    }
+    
+    .btn.v8 {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    @media (max-width: 991px) {
+        .site-mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1001;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+    
+        .site-mobile-menu.active {
+            transform: translateX(0);
+        }
+    }
+    </style>
       <!--Hero section starts-->
       <div
         class="hero v2 section-padding"
@@ -1035,5 +1210,12 @@
     <!--Main js-->
     <script src="js/main.js"></script>
     <!--Scripts ends-->
+
+    <script>
+      if (localStorage.getItem("loggedIn") !== "true") {
+        window.location.href = "login.html"; // ✅ Redirect to login page
+    }
+
+    </script>
   </body>
 </html>
