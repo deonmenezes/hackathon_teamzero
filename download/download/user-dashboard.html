@@ -1,0 +1,13 @@
+<h1>User Dashboard</h1>
+<p>Welcome, <span id="username"></span>!</p>
+<button onclick="logout()">Logout</button>
+
+<script>
+document.getElementById("username").textContent = localStorage.getItem("userRole") === "admin" ? "Admin" : "User";
+
+function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userRole");
+    window.location.href = "login.html";
+}
+</script>
